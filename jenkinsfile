@@ -5,13 +5,19 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-username/your-repo.git'
+                git 'https://github.com/pran-17/beyondchats.git'
             }
         }
 
         stage('Build') {
             steps {
                 sh 'echo "Building project"'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'echo "Running tests"'
             }
         }
 
