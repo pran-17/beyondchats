@@ -11,13 +11,13 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'echo "Building project"'
+                sh 'echo Building'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'echo "Running tests"'
+                sh 'echo Testing'
             }
         }
 
@@ -25,6 +25,14 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonar server') {
                     sh 'sonar-scanner'
+                }
+            }
+        }
+
+        stage('Quality Gate') {
+            steps {
+                timeout(time: 2, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
                 }
             }
         }
